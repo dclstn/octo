@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  Dropdown, IconButton, Popover, Toggle, Whisper,
+  Checkbox, Dropdown, IconButton, Popover, Whisper,
 } from 'rsuite';
 import { ArrowDown } from '@rsuite/icons';
 import { Games, StorageKeys } from '../utils/contants';
@@ -38,7 +38,7 @@ export default function GameDropdown() {
   return (
     <div className={styles.content}>
       <div className={styles.toggle}>
-        <Toggle onChange={(bool) => handleGameEnabled(bool)} checked={gameEnabled} />
+        <Checkbox onChange={(_, bool) => handleGameEnabled(bool)} checked={gameEnabled} />
         <div>Filter by Game</div>
       </div>
       <Whisper

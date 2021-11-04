@@ -1,11 +1,10 @@
 import querystring from 'querystring';
 import axios from 'axios';
 import storage from './storage';
-import { StorageKeys } from './contants';
+import { CLIENT_ID, StorageKeys } from './contants';
 
 const API_ENDPOINT = 'https://api.twitch.tv/helix/';
 const GQL_ENDPOINT = 'https://gql.twitch.tv/gql';
-const CLIENT_ID = 'w6e6774i052v1ds6acg6oy64zufmny';
 
 let accessToken = storage.get(StorageKeys.TWITCH_AUTH).token;
 

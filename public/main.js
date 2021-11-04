@@ -5,17 +5,15 @@ remote.initialize();
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 700,
-    height: 500,
+    width: 1400,
+    height: 900,
+    minWidth: 600,
     webPreferences: {
       enableRemoteModule: true,
-      devTools: true,
     },
   });
 
   win.loadURL('http://localhost:3000');
-
-  win.webContents.openDevTools();
 }
 
 app.on('ready', () => createWindow);

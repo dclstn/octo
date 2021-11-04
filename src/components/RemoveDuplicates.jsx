@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Toggle } from 'rsuite';
+import { Checkbox } from 'rsuite';
 import { StorageKeys } from '../utils/contants';
 import storage from '../utils/storage';
 import styles from './RemoveDuplicates.module.css';
@@ -16,7 +16,7 @@ export default function RemoveDuplicates() {
 
   return (
     <div className={styles.toggle}>
-      <Toggle checked={removeDuplicates} onChange={(bool) => handleRemoveDuplicates(bool)} />
+      <Checkbox checked={removeDuplicates} onChange={(_, bool) => handleRemoveDuplicates(bool)} />
       <div>Remove Duplicates</div>
     </div>
   );

@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StorageKeys } from '../utils/contants';
 import storage from '../utils/storage';
 import twitchApi from '../utils/twitch-api';
 
 function saveCredentials() {
-  const navigate = useNavigate();
   const urlSearchParams = new URLSearchParams(window.location.hash);
   const params = Object.fromEntries(urlSearchParams.entries());
 
@@ -23,13 +22,16 @@ function saveCredentials() {
   });
 
   twitchApi.setAccessToken(token);
-
-  const lastVisit = storage.get(StorageKeys.LAST_VISIT);
-  navigate(lastVisit);
 }
 
 export default function TwitchAuthentication() {
-  useEffect(() => saveCredentials(), []);
+  const navigate = useNavigate();
 
-  return <h1>Hello</h1>;
+  useEffect(() => {
+    saveCredentials();
+    const lastVisit = storage.get(StorageKeys.LAST_VISIT);
+    navigate(lastVisit);
+  }, []);
+
+  return null;
 }

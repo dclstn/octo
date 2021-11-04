@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CustomProvider } from 'rsuite';
-import TwitchAuthentication from './Auth/Twitch';
+import TwitchAuthentication from './auth/Twitch';
 import LoginWithTwitch from './pages/Login';
 import Main from './pages/Main';
 import { StorageKeys } from './utils/contants';
