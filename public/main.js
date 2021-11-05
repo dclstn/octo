@@ -1,4 +1,4 @@
-const { BrowserWindow, app } = require('electron');
+const { BrowserWindow, app, ipcMain } = require('electron');
 const remote = require('@electron/remote/main');
 
 remote.initialize();
@@ -9,7 +9,9 @@ function createWindow() {
     height: 900,
     minWidth: 600,
     webPreferences: {
+      nodeIntegration: true,
       enableRemoteModule: true,
+      contextIsolation: false,
     },
   });
 
@@ -29,3 +31,5 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+ipcMain.handle('download', () => 'done');

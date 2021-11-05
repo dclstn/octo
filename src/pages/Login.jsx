@@ -15,7 +15,7 @@ export default function LoginWithTwitch() {
       <div className={styles.content}>
         <h3>🐙 Octo</h3>
         <p className={styles.description}>
-          This application requires you to authenticate you Twitch account to proceed
+          This application requires you to authenticate your Twitch account to proceed.
         </p>
         <Button onClick={() => handleClick()} appearance="primary">
           Login with Twitch

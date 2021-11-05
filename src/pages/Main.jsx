@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Divider, IconButton, Panel } from 'rsuite';
+import {
+  Divider, IconButton, Panel, Progress,
+} from 'rsuite';
 import { FileDownload, Search } from '@rsuite/icons';
 import GameDropdown from '../components/GameDropdown';
 import UserWhitelist from '../components/UserWhitelist';
@@ -19,6 +21,10 @@ export default function Main() {
     const { data } = await getClips();
     setClips(data);
     setLoading(false);
+  }
+
+  async function handleDownload() {
+    console.log('test');
   }
 
   return (
@@ -41,15 +47,18 @@ export default function Main() {
           </IconButton>
         </div>
         <Divider />
-
-        <IconButton
-          disabled={checkedKeys.length === 0}
-          appearance="primary"
-          size="sm"
-          icon={<FileDownload />}
-        >
-          {`Download ${checkedKeys.length} clips`}
-        </IconButton>
+        <div className={styles.config}>
+          <Progress />
+          <IconButton
+            onClick={() => handleDownload()}
+            disabled={checkedKeys.length === 0}
+            appearance="primary"
+            size="sm"
+            icon={<FileDownload />}
+          >
+            {`Download ${checkedKeys.length} clips`}
+          </IconButton>
+        </div>
       </Panel>
       <ClipsTable clips={clips} checkedKeys={checkedKeys} setCheckedKeys={setCheckedKeys} />
     </div>
