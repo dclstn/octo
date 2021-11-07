@@ -33,7 +33,7 @@ export default function Main() {
 
     responses.forEach(async ({ url, meta }) => {
       await ipcRenderer.invoke('download-clip', url, meta);
-      setProgress((prog) => prog + iteration);
+      setProgress((prog) => (prog + iteration).toFixed(0));
     });
 
     setLoading(false);
