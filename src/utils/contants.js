@@ -3,7 +3,8 @@ export const StorageKeys = {
   GAME_SET: 'game:set',
   GAME_ENABLED: 'game:enabled',
   REMOVE_DUPLICATES: 'duplicates:remove',
-  TWITCH_AUTH: 'twitch:oauth',
+  TWITCH_AUTH: 'twitch:access_token',
+  TWITCH_OAUTH: 'twitch:oauth',
   LAST_VISIT: 'visit:last',
   DATE_KEY: 'date:key',
   DATE_ENABLED: 'date:enabled',
@@ -42,4 +43,5 @@ export const DefaultStorageVaues = {
     token: null,
     scope: null,
   },
+  [StorageKeys.TWITCH_OAUTH]: null,
 };

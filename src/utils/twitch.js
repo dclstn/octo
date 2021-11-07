@@ -4,18 +4,18 @@ let currentUser = null;
 
 export function getClipsByGame(id, start = null, end = null) {
   return start == null && end == null
-    ? twitchApi.get(`clips?game_id=${id}`, { auth: true })
-    : twitchApi.get(`clips?game_id=${id}&started_at=${start}&ended_at=${end}`, { auth: true });
+    ? twitchApi.get(`clips?game_id=${id}`)
+    : twitchApi.get(`clips?game_id=${id}&started_at=${start}&ended_at=${end}`);
 }
 
 export function getAllClips(start = null, end = null) {
   return start == null && end == null
-    ? twitchApi.get('clips', { auth: true })
-    : twitchApi.get(`clips?started_at=${start}&ended_at=${end}`, { auth: true });
+    ? twitchApi.get('clips')
+    : twitchApi.get(`clips?started_at=${start}&ended_at=${end}`);
 }
 
 export function getGames(name) {
-  return twitchApi.get(`games?name=${name}`, { auth: true });
+  return twitchApi.get(`games?name=${name}`);
 }
 
 export async function getCurrentUser() {
@@ -23,7 +23,7 @@ export async function getCurrentUser() {
     return currentUser;
   }
 
-  const { data } = await twitchApi.get('users', { auth: true });
+  const { data } = await twitchApi.get('users');
   [currentUser] = data.data;
 
   return currentUser;

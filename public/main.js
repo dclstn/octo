@@ -1,7 +1,14 @@
-const { BrowserWindow, app, ipcMain } = require('electron');
+const {
+  BrowserWindow, app, ipcMain, dialog,
+} = require('electron');
 const remote = require('@electron/remote/main');
+const fs = require('fs');
+const { default: axios } = require('axios');
+const path = require('path');
 
 remote.initialize();
+
+let directory = null;
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -11,11 +18,13 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
-      contextIsolation: false,
+      contextIsolation: false, // not safe
     },
   });
 
   win.loadURL('http://localhost:3000');
+
+  win.webContents.openDevTools();
 }
 
 app.on('ready', () => createWindow);
@@ -32,4 +41,29 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.handle('download', () => 'done');
+ipcMain.handle('select-directory', async () => {
+  directory = await dialog.showOpenDialog({ properties: ['openDirectory'] });
+
+  if (directory.canceled) {
+    throw new Error('No directory selected');
+  }
+});
+
+ipcMain.handle(
+  'download-clip',
+  (_, url, meta) => new Promise((resolve, reject) => {
+    axios({
+      url,
+      method: 'GET',
+      responseType: 'stream',
+    })
+      .then(({ data }) => {
+        const { title } = meta;
+        const filename = path.resolve(directory.filePaths[0], `${title}.mp4`);
+        const writer = fs.createWriteStream(filename);
+        data.pipe(writer);
+        data.on('end', () => resolve());
+      })
+      .catch((e) => reject(e));
+  }),
+);

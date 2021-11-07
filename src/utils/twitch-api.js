@@ -18,7 +18,7 @@ function request(method, path, options = {}) {
     data: options.body ? JSON.stringify(options.body) : undefined,
     headers: {
       'Client-ID': CLIENT_ID,
-      Authorization: options.auth && accessToken !== null ? `Bearer ${accessToken}` : undefined,
+      Authorization: `Bearer ${accessToken}`,
     },
     timeout: 30000,
   });
@@ -29,20 +29,11 @@ export default {
     accessToken = newAccessToken;
   },
 
-  graphqlQuery(query, variables) {
-    if (accessToken == null) {
-      return Promise.reject(new Error('unset accessToken'));
-    }
-
-    const body = { query };
-    if (variables) {
-      body.variables = variables;
-    }
-
-    return request('POST', null, {
-      url: GQL_ENDPOINT,
-      body,
-      auth: true,
+  graphqlQuery(data) {
+    return axios.post(GQL_ENDPOINT, data, {
+      headers: {
+        'Client-ID': 'kimne78kx3ncx6brgo4mv6wki5h1ko',
+      },
     });
   },
 
