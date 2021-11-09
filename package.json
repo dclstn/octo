@@ -1,6 +1,6 @@
 {
   "name": "octo",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "author": {
     "name": "Donnie Colston",
@@ -38,6 +38,7 @@
   "build": {
     "extends": null,
     "appId": "com.example.electron-cra",
+    "compression": "maximum",
     "mac": {
       "icon": "./public/icons/mac/icon.icns",
       "category": "public.app-category.utilities"
@@ -46,11 +47,9 @@
       "icon": "./public/icons/png/icon.png"
     },
     "files": [
-      "dist/**/*",
       "build/**/*",
       "node_modules/**/*",
       "public",
-      "*.js",
       "package.json"
     ],
     "directories": {
