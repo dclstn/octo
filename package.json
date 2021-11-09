@@ -2,6 +2,11 @@
   "name": "octo",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Donnie Colston",
+    "email": "donnieacolston@gmail.com",
+    "url": "https://vasp.dev"
+  },
   "dependencies": {
     "@electron/remote": "^2.0.1",
     "@rsuite/icons": "^1.0.2",
@@ -9,7 +14,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
-    "electron": "^15.3.0",
+    "electron-is-dev": "^2.0.0",
     "eslint": "^7.32.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -27,8 +32,30 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm run electron:start\"",
-    "electron:build": "",
+    "electron:build": "npm run build && electron-builder -c.extraMetadata.main=build/main.js",
     "electron:start": "wait-on tcp:3000 && electron ."
+  },
+  "build": {
+    "extends": null,
+    "appId": "com.example.electron-cra",
+    "mac": {
+      "icon": "./public/icons/mac/icon.icns",
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "icon": "./public/icons/png/icon.png"
+    },
+    "files": [
+      "dist/**/*",
+      "build/**/*",
+      "node_modules/**/*",
+      "public",
+      "*.js",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "public"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +78,9 @@
   "devDependencies": {
     "concurrently": "^6.3.0",
     "cross-env": "^7.0.3",
+    "electron": "^15.3.0",
+    "electron-builder": "^22.13.1",
+    "electron-packager": "^15.4.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.2",

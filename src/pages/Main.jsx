@@ -16,7 +16,7 @@ export default function Main() {
   const [checkedKeys, setCheckedKeys] = useState([]);
   const [loading, setLoading] = useState(false);
   const [clips, setClips] = useState([]);
-  const [progress, setProgress] = useState(100);
+  const [progress, setProgress] = useState(0);
 
   const checkedClips = useMemo(
     () => clips.filter(({ id }) => checkedKeys.includes(id)),
@@ -25,7 +25,12 @@ export default function Main() {
 
   async function handleDownload() {
     const responses = await getClipMetaData(checkedClips);
-    await ipcRenderer.invoke('select-directory');
+
+    try {
+      await ipcRenderer.invoke('select-directory');
+    } catch (e) {
+      return;
+    }
 
     const iteration = 100 / responses.length;
     setProgress(0);

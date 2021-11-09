@@ -11,7 +11,7 @@ export const StorageKeys = {
 };
 
 export const CLIENT_ID = '44myc6m2b760fckgsbpko1upvjv2kb';
-export const TWITCH_AUTH_URL = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=http://localhost:3000/twitch&response_type=token&scope=user:edit`;
+export const TWITCH_AUTH_URL = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=http://localhost:8000/twitch&response_type=token&scope=user:edit`;
 
 export const Games = [
   {
